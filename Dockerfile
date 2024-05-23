@@ -1,17 +1,19 @@
-# Use the official Python image as base
-FROM python:3.9-slim
+# Use an official PHP runtime as a parent image
+FROM php:7.4-apache
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /var/www/html
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy your PHP application code into the container
+COPY . .
 
-# Install any dependencies required by the application
-RUN pip install --no-cache-dir Flask
+# Install PHP extensions and other dependencies
+RUN apt-get update && \
+    apt-get install -y libpng-dev && \
+    docker-php-ext-install pdo pdo_mysql gd
 
-# Specify the port number the container should expose
-EXPOSE 5000
+# Expose the port Apache listens on
+EXPOSE 80
 
-# Define the command to run your application
-CMD ["python", "app.py"]
+# Start Apache when the container runs
+CMD ["apache2-foreground"]
