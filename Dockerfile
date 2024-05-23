@@ -1,6 +1,6 @@
 # Dockerfile
 # Use Ubuntu as the base image
-FROM ubuntu:latest
+FROM ubuntu
 
 # to set working directory in the container
 WORKDIR /app
