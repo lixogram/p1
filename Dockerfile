@@ -1,4 +1,4 @@
-echo 'FROM node:14-alpine'
+'FROM node:14-alpine'
 WORKDIR /app
 COPY . .
 RUN npm install
